@@ -1,0 +1,29 @@
+version: "3.3"
+services:
+
+  BE_doctor_infos_pgsql:
+    image: postgres:latest
+    container_name: BE_doctor_infos_pgsql
+    environment:
+      - POSTGRES_USER=pgsql
+      - POSTGRES_PASSWORD=pgsql
+      - POSTGRES_DB=doctor_info_app
+      - PGDATA=/var/lib/postgresql/data/pg_files
+    network_mode: "host"
+    volumes:
+      - ./config/pgsql.conf:/etc/postgresql.conf
+      - .pg_files:/var/lib/postgresql/data/pg_files
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+  
+  BE_django:
+    image: python:3.9
+    container_name: BE_django
+    network_mode: "host"
+    volumes:
+      - ./:/home
+      - ./config/pgsql.conf:/etc/postgresql.conf
+      - .pg_files:/var/lib/postgresql/data/pg_files
+    # command: ["sh", "/home/scripts/setup.sh"]
+    command: ["tail", "-f", "/dev/null"]
+    depends_on:
+      - BE_doctor_infos_pgsql

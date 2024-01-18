@@ -1,0 +1,28 @@
+{
+  "doctor_name": "lonely_doctor",
+  "doctor_category": "GENERAL_PRACITIONER",
+  "address": {
+      "room": "room",
+      "building": "building",
+      "street": "street",
+      "district": "KWUN_TONG"
+  },
+  "clinic_fee": 20000,
+  "clinic_fee_remark": "",
+  "member_discount_remark": "",
+  "phone_nums": ["12345678","87654321"],
+  "opening_hours": [
+      {
+          "weekday": 1,
+          "from_hour": "9:00",
+          "to_hour": "13:00",
+          "is_closed": true
+      },
+      {
+          "weekday": 2,
+          "from_hour": "9:00",
+          "to_hour": "13:00",
+          "is_closed": true
+      }
+  ]
+}
