@@ -153,7 +153,7 @@ class DoctorInfo(
 
             class OpeningHoursSerializer(serializers.ModelSerializer):
                 class Meta: 
-                    model = OpeningHours
+                    model = OpeningHour
                     fields = '__all__'
 
             class DoctorInfoSerializer(serializers.ModelSerializer):
@@ -239,7 +239,7 @@ class DoctorInfo(
 
             for opening in opening_hours:
 
-                obj_opening_hours = OpeningHours(
+                obj_opening_hours = OpeningHour(
                     doctor = obj_doctor,
                     weekday = opening['weekday'],
                     from_hour = opening['from_hour'],
@@ -352,13 +352,13 @@ class DoctorInfo(
                     })
 
                     list_pending_bulk_created_opening_hours.append(
-                        OpeningHours(
+                        OpeningHour(
                             **(doctors[i]['opening_hours'][j])
                         )
                     )
             
             # 1 way bulk create SQL :)
-            OpeningHours.objects.bulk_create(
+            OpeningHour.objects.bulk_create(
                 list_pending_bulk_created_opening_hours
             )
 
@@ -454,7 +454,7 @@ WEEKDAYS = [
   (8, 8)
 ]
 
-class OpeningHours(
+class OpeningHour(
     models.Model
 ):
     doctor = models.ForeignKey(DoctorInfo, on_delete=models.CASCADE, related_name="opening_hours")
@@ -464,7 +464,7 @@ class OpeningHours(
     is_closed = models.BooleanField()
 
     class Meta:
-        db_table = "T_opening_hours"
+        db_table = "T_opening_hour"
 
 # init
 DoctorInfo.CRUD()

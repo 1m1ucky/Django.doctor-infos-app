@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory
-from doctor_infos_app.models import DoctorCategory, DoctorInfo, Address, PhoneNum, OpeningHours
+from doctor_infos_app.models import DoctorCategory, DoctorInfo, Address, PhoneNum, OpeningHour
 from django.db import connection
 from django.urls import reverse
 
@@ -149,7 +149,7 @@ class ModelTestCase(TestCase):
         objs_doctor = DoctorInfo.objects.all()
         objs_address = Address.objects.all()
         objs_phonenum = PhoneNum.objects.all()
-        objs_opening_hours = OpeningHours.objects.all()
+        objs_opening_hours = OpeningHour.objects.all()
 
         self.assertEqual(list(objs_address)[0].id, self.crud_created_doctor['address']['id'])
         self.assertEqual(list(objs_phonenum)[0].digits, '12345678')
