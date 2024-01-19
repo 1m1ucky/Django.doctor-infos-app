@@ -15,15 +15,17 @@ services:
       - .pg_files:/var/lib/postgresql/data/pg_files
     command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
   
-  BE_django:
+  BE_doctor_infos_django:
     image: python:3.9
-    container_name: BE_django
+    container_name: BE_doctor_infos_django
     network_mode: "host"
+    user: "${UID}:${GID}"
     volumes:
       - ./:/home
       - ./config/pgsql.conf:/etc/postgresql.conf
       - .pg_files:/var/lib/postgresql/data/pg_files
-    # command: ["sh", "/home/scripts/setup.sh"]
-    command: ["tail", "-f", "/dev/null"]
+    command: >
+      bash -c "cd /home && ./scripts/setup.sh"
+    # command: ["tail", "-f", "/dev/null"]
     depends_on:
       - BE_doctor_infos_pgsql
