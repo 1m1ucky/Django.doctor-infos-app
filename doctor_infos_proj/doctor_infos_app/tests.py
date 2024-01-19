@@ -32,9 +32,9 @@ class FunctionalUnitTestCase(TestCase):
             DoctorViewSet.validate_schema_of_doctor({
             })
         except Exception:
-            print("assertion error")
+            logging.info("assertion error")
 
-    def test_orm_bulk_create(self):
+    def test_orm_bulk_create_api(self):
 
         arr_addresses = []
         list_doctors = []
@@ -448,7 +448,7 @@ class DoctorAPIViewTestCase(TestCase):
 
         response = httpclient.get('/doctor')
 
-        self.assertTrue(len(response.data) == 1)
+        self.assertEqual(len(response.data), 1)
 
         DoctorAPIViewTestCase.Helper.assert_valid_shape_of_response_data(self, response.data[0])
 
@@ -467,8 +467,6 @@ class DoctorAPIViewTestCase(TestCase):
             content_type="application/json"
         )
 
-        print(response)
-
         self.assertEqual(len(response.data), 4)
 
         response = httpclient.get('/doctor')
@@ -485,7 +483,7 @@ class DoctorAPIViewTestCase(TestCase):
                  
         response = httpclient.get('/doctor')
 
-        self.assertTrue(len(response.data) == 0)
+        self.assertEqual(len(response.data), 0)
 
         response = httpclient.post('/doctor',
             self.fixture,
@@ -494,7 +492,7 @@ class DoctorAPIViewTestCase(TestCase):
 
         response = httpclient.get('/doctor')
 
-        self.assertTrue(len(response.data) == 1)
+        self.assertEqual(len(response.data), 1)
 
         # list filter 1
         # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#django.test.Client.get
@@ -506,7 +504,7 @@ class DoctorAPIViewTestCase(TestCase):
             'price_range_to': 200
         })
 
-        self.assertTrue(len(response.data) == 1)
+        self.assertEqual(len(response.data), 1)
 
         DoctorAPIViewTestCase.Helper.assert_valid_shape_of_response_data(self, response.data[0])
 
@@ -518,7 +516,7 @@ class DoctorAPIViewTestCase(TestCase):
             'price_range_to': 800
         })
 
-        self.assertTrue(len(response.data) == 0)
+        self.assertEqual(len(response.data), 0)
 
         # list filter 3
         response = httpclient.get("/doctor", {
@@ -526,14 +524,14 @@ class DoctorAPIViewTestCase(TestCase):
             'district': "CENTRAL",
         })
 
-        self.assertTrue(len(response.data) == 1)
+        self.assertEqual(len(response.data), 1)
 
         # list filter 4
         response = httpclient.get("/doctor", {
             'district': "CENTRAL",
         })
 
-        self.assertTrue(len(response.data) == 1)
+        self.assertEqual(len(response.data), 1)
 
         # list filter 5
         response = httpclient.get("/doctor", {
@@ -541,7 +539,7 @@ class DoctorAPIViewTestCase(TestCase):
             'district': "CENTRAL",
         })
 
-        self.assertTrue(len(response.data) == 0)
+        self.assertEqual(len(response.data), 0)
 
         # list filter 6
         response = httpclient.get("/doctor", {
@@ -549,7 +547,7 @@ class DoctorAPIViewTestCase(TestCase):
             'district': "OTHER",
         })
 
-        self.assertTrue(len(response.data) == 0)
+        self.assertEqual(len(response.data), 0)
 
     def test_api_get_one_doctor(self):
 
@@ -568,6 +566,14 @@ class DoctorAPIViewTestCase(TestCase):
         response = httpclient.get('/doctor/' + str(id))
 
         DoctorAPIViewTestCase.Helper.assert_valid_shape_of_response_data(self, response.data)
+
+    def test_api_delete_all_doctor(self):
+
+        logging.info('##################### test_api_delete_all_doctor #####################')
+
+        httpclient = self.httpclient
+
+        httpclient.delete('/doctor')
 
 # TODO: story tests
 class StoryTestCase(TestCase):
@@ -744,3 +750,9 @@ class StoryTestCase(TestCase):
         })
 
         self.assertEqual(len(response.data), 3)
+
+        response = httpclient.get("/doctor", {
+            "language": "ENG",
+        })
+
+        self.assertEqual(len(response.data), 4)
