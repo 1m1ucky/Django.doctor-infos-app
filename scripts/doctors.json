@@ -19,7 +19,8 @@
               "to_hour": "13:00",
               "is_closed": false
           }
-      ]
+      ],
+      "language": "ENG"
   },
   {
       "doctor_name": "D2",
@@ -41,7 +42,8 @@
               "to_hour": "13:00",
               "is_closed": false
           }
-      ]
+      ],
+      "language": "ENG"
   },
   {
       "doctor_name": "D3",
@@ -52,7 +54,7 @@
           "street": "street",
           "district": "KWUN_TONG"
       },
-      "clinic_fee": 20000,
+      "clinic_fee": 800,
       "clinic_fee_remark": "",
       "member_discount_remark": "",
       "phone_nums": ["12345678","87654321"],
@@ -63,6 +65,7 @@
               "to_hour": "13:00",
               "is_closed": false
           }
-      ]
+      ],
+      "language": "ENG"
   }
 ]

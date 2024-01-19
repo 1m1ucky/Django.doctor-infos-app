@@ -1,10 +1,10 @@
 
 ## setup virtualenv
-python -m venv .venv 
-source ../.venv/bin/activate
+python -m venv .venv.python
+source ./.venv.python/bin/activate
 
 ## python deps  
-pip install requirements.txt
+pip install -r requirements.txt
 
 ## enter proj
 cd doctor_infos_proj
@@ -13,7 +13,7 @@ cd doctor_infos_proj
 ./manage.py migrate 
 
 ## test
-./manage.py test
+# ./manage.py test
 
 ## local srv
 ./manage.py runserver
