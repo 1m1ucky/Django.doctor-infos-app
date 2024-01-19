@@ -6,7 +6,7 @@
 ## Requirements
 1. Choice of Framework & Library:
     - [o] django 4 + python3.9
-        a. What are the benefits & drawbacks associated with that choice?
+        - a. What are the benefits & drawbacks associated with that choice?
             - easy cli
                 - setup projects, auto probe and do database migrations
                 - testing
@@ -17,7 +17,7 @@
                 - database admin page
             - native well designed language
             - development loggings in web console
-        b. What are the assumptions underlying that choice?
+        - b. What are the assumptions underlying that choice?
             - python runtime installed in the deployment server
     - [o] docker
         - easy preconfig to deploy by one command
@@ -92,7 +92,7 @@ mkdir .pg_files
 docker-compose up -d
 ```
 
-# Test Schemas
+## Test Schemas
 ```sh
 ## test steps are in ./scripts/test.sh
 . ./scripts/test.sh
