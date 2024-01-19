@@ -377,7 +377,7 @@ class DoctorInfo(
                 language = None
             ):
 
-            # logging.info("-----find------")
+            # logging.info("DEBUG: find")
             # logging.info(district)
             # logging.info(doctor_category)
             # logging.info(price_range_from)
