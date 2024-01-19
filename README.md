@@ -1,4 +1,5 @@
-# Necktie Doctor listing API App 
+# Necktie Doctor listing API App
+
 ## Purpose
 - demonstrate the power of Django 4 python on a doctor listing app
 
@@ -15,14 +16,13 @@
                 - api frameworks
                 - database admin page
             - native well designed language
+            - development loggings in web console
         b. What are the assumptions underlying that choice?
             - python runtime installed in the deployment server
     - [o] docker
         - easy preconfig to deploy by one command
     - [o] postgresql
         - unique feature of bulk create with returned id
-        - good lib + frameworks: rest api framework
-        - development loggings in web console
     - [-] powerful api frameworks (HOLD ON AS NO TIME)
         - [o] [rest framework] (https://www.django-rest-framework.org/)
             - serializer to serialize back the orm data on multiple subfield relations
@@ -92,7 +92,7 @@ mkdir .pg_files
 docker-compose up -d
 ```
 
-## Test Schemas
+# Test Schemas
 ```sh
 ## test steps are in ./scripts/test.sh
 . ./scripts/test.sh
