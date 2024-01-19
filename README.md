@@ -1,8 +1,11 @@
-# Doctor listing API App
+# Necktie Doctor listing API App
+
+## Purpose
+- demonstrate the power of Django 4 python on a doctor listing app
 
 ## Requirements
 1. Choice of Framework & Library:
-    - django 4 (as fast to test + rich ecosystem support on python libraries)
+    - [o] django 4
         a. What are the benefits & drawbacks associated with that choice?
             - easy cli
                 - setup projects, auto probe and do database migrations
@@ -12,16 +15,22 @@
                 - logging
                 - api frameworks
                 - database admin page
+            - native well designed language
         b. What are the assumptions underlying that choice?
             - python runtime installed in the deployment server
-    - docker
+    - [o] docker
         - easy preconfig to deploy by one command
-    - postgresql
+    - [o] postgresql
         - unique feature of bulk create with returned id
         - good lib + frameworks: rest api framework
         - development loggings in web console
-    - powerful api frameworks
-        - [django ninja] (https://django-ninja.dev)
+    - [-] powerful api frameworks (HOLD ON AS NO TIME)
+        - [o] [rest framework] (https://www.django-rest-framework.org/)
+            - serializer to serialize back the orm data on multiple subfield relations
+            - url view pattern to request mapping
+            - [-] data validation (HOLD ON AS NO TIME)
+            - support pagination in other projects
+        - [-] [django ninja] (https://django-ninja.dev)
             - data schema validation on API input
             - auto API input params / query parsing by easy rules
             - data schema parsing on API output
@@ -33,36 +42,43 @@
             - authorization in other projects
             - exception handler
             - api versioning
-    - pgcli
+    - [o] pgcli
         - view sql tables
-    
+
 2. Potential Improvements:
     - much time wasting on debugging the API
         - to improve
             - use some python auto logger to help to debug
+    - refactoring a better version of the CRUD model serializers by rest framework
+    - provide OpenAPI swagger like doc using django ninja, integrate with rest framework
+    - more assertion + testcases on postive and negative test cases
+        - [*] opening hours correct infos + duplication validation, etc
+    - add internal error + status code handler using rest framework
 
 3. Production consideration:
-    - installations
+    - deployment system pre-installations
         - docker
+    - https
+        - installation of signed domain ssl certicate
 
 4. Assumptions
     - Frontend can handle the correct use of Backend API
         - include
             - correct format of payload validated from Frontend as Backend currently not validate them
+    - deployment system pre-installations
+        - docker
 
 ## App featues
 - [o] CRUD + bulk_create
-- [o] unit + model + API tests + bulk_create
-    - [o] price range
-    - [o] district
-    - [o] lang
-    - [o] category
+- [o] unit + model + API tests (with good naming test cases)
+    - [o] bulk_create
+    - filters
+        - [o] price range
+        - [o] district
+        - [o] lang
+        - [o] category
 - [o] well returned serialized data from domain models
-- [o] app documentation
-
-- [] CRUD v2 rest framework fast to use serializer
-    - must with ninja?
-    - using rest framework serializer + filtering
+- [-] app documentation
 
 ## App Architecture
 - well designed entity CRUD pattern implementation in django ORM model layer
@@ -73,18 +89,12 @@
 ## Setup Guideline
 ```sh
 ## setup steps are in ./scripts/setup.sh
+mkdir .pg_files
 docker-compose up -d
 ```
 
 # Test Schemas
 ```sh
 ## test steps are in ./scripts/test.sh
-./scripts/test.sh
+. ./scripts/test.sh
 ```
-
-# Difficulties
-- much time wasting on debugging the API
-- [*] refactoring a better version of the CRUD model serializers
-
-## Future Improvements
-- more assertion + testcases on postive and negative test cases
