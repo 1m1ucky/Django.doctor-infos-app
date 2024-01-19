@@ -20,8 +20,6 @@ from django.db import connection
 
 from django.db.models import Q
 
-# [o] field translation lib type 1, 2
-
 class Address(
     models.Model
 ):
@@ -122,7 +120,6 @@ class DoctorInfo(
 
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
-    # clinic_fee = MoneyField(max_digits=14, decimal_places=2, default_currency='HKD')
     clinic_fee = models.IntegerField()
 
     clinic_fee_remark = models.TextField()
@@ -376,12 +373,6 @@ class DoctorInfo(
                 price_range_to = sys.maxsize,
                 language = None
             ):
-
-            # logging.info("DEBUG: find")
-            # logging.info(district)
-            # logging.info(doctor_category)
-            # logging.info(price_range_from)
-            # logging.info(price_range_to)
 
             objs = DoctorInfo.objects.filter(
                 (Q(address__district = district) if district != None else Q()) &

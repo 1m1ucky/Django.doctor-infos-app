@@ -16,10 +16,6 @@ from typing import List
 
 import sys
 
-# from ninja import Query, Router, Schema
-
-# router = Router(tags=["doctors"])
-
 class APISchemaException(APIException):
     status_code = 400
     default_detail = 'Wrong API schema'
@@ -50,14 +46,11 @@ class DoctorViewSet(viewsets.ModelViewSet):
     def create(
             self,
             request,
-            # doctor #: DoctorInfoSchema
         ):
 
         logging.info('##################### create #####################')
 
         doctor = request.data
-
-        # validation
 
         if isinstance(doctor, list):
 
@@ -76,15 +69,13 @@ class DoctorViewSet(viewsets.ModelViewSet):
     def bulk_create(
             self,
             request,
-            # doctors #: List[DoctorInfoSchema]
         ):
 
         logging.info('##################### bulk create #####################')
 
         doctors = request.data
 
-        # validation
-        # [self.validate_schema_of_doctor(d) for d in doctors]
+        [self.validate_schema_of_doctor(d) for d in doctors]
 
         doctors = DoctorInfo.CRUD().bulk_create(
             doctors
@@ -104,7 +95,7 @@ class DoctorViewSet(viewsets.ModelViewSet):
         logging.info('##################### list #####################')
 
         # TODO: old way to get query params
-        #
+
         query = request.query_params
         
         doctors = DoctorInfo.CRUD().find(
@@ -117,7 +108,6 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
         return Response(data = doctors)
 
-    # @router.get("/{int:id}", response=None)
     def retrieve(
             self,
             request,
