@@ -1,5 +1,4 @@
-# Necktie Doctor listing API App
-
+# Necktie Doctor listing API App 
 ## Purpose
 - demonstrate the power of Django 4 python on a doctor listing app
 
@@ -93,7 +92,7 @@ mkdir .pg_files
 docker-compose up -d
 ```
 
-# Test Schemas
+## Test Schemas
 ```sh
 ## test steps are in ./scripts/test.sh
 . ./scripts/test.sh
