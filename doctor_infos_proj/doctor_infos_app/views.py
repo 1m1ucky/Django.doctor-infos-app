@@ -16,9 +16,9 @@ from typing import List
 
 import sys
 
-from ninja import Query, Router, Schema
+# from ninja import Query, Router, Schema
 
-router = Router(tags=["doctors"])
+# router = Router(tags=["doctors"])
 
 class APISchemaException(APIException):
     status_code = 400
@@ -47,7 +47,6 @@ class DoctorViewSet(viewsets.ModelViewSet):
             raise APISchemaException()
         pass
 
-    @router.post("/", response=None)
     def create(
             self,
             request,
@@ -57,15 +56,16 @@ class DoctorViewSet(viewsets.ModelViewSet):
         logging.info('##################### create #####################')
 
         doctor = request.data
-        
+
         # validation
-        # self.validate_schema_of_doctor(doctor)
 
         if isinstance(doctor, list):
 
             return self.bulk_create(request)
 
         else:
+            
+            self.validate_schema_of_doctor(doctor)
 
             doctor = DoctorInfo.CRUD().create(
                 **doctor
@@ -73,7 +73,6 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
             return Response(data = doctor)
     
-    @router.post("/", response=None)
     def bulk_create(
             self,
             request,
@@ -93,14 +92,13 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
         return Response(data = doctors)
 
-    @router.get("/", response=None)
     def list(self,
              request,
-             district:str = None,
-             category:str = None,
-             price_range_from:int = 0,
-             price_range_to:int = 0,
-             language:str = None,
+             district = None,
+             category = None,
+             price_range_from = 0,
+             price_range_to = 0,
+             language = None,
         ):
 
         logging.info('##################### list #####################')
@@ -117,17 +115,9 @@ class DoctorViewSet(viewsets.ModelViewSet):
             language = query.get('language', None)
         )
 
-        # doctors = DoctorInfo.CRUD().find(
-        #     district = district,
-        #     doctor_category = category,
-        #     price_range_from = price_range_from,
-        #     price_range_to = price_range_to,
-        #     language = language,
-        # )
-
         return Response(data = doctors)
 
-    @router.get("/{int:id}", response=None)
+    # @router.get("/{int:id}", response=None)
     def retrieve(
             self,
             request,
@@ -142,3 +132,14 @@ class DoctorViewSet(viewsets.ModelViewSet):
             raise Http404
         else:
             return Response(data = doctor)
+
+    def delete(
+            self,
+            request
+        ):
+
+        logging.info('##################### delete #####################')
+
+        DoctorInfo.CRUD().delete_all()
+
+        return Response(status=status.HTTP_200_OK)
