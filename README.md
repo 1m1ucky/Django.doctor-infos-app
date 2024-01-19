@@ -5,7 +5,7 @@
 
 ## Requirements
 1. Choice of Framework & Library:
-    - [o] django 4
+    - [o] django 4 + python3.9
         a. What are the benefits & drawbacks associated with that choice?
             - easy cli
                 - setup projects, auto probe and do database migrations
@@ -57,7 +57,7 @@
 
 3. Production consideration:
     - deployment system pre-installations
-        - docker
+        - docker: python3.9
     - https
         - installation of signed domain ssl certicate
 
